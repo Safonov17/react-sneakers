@@ -60,11 +60,37 @@
         padding: 60px;
         padding-top: 30px;
 
-        .section-title {
+        .title-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 30px;
+            form {
+                position: relative;
+                img {
+                    position: absolute;
+                    left: 18px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                .search {
+                    width: 250px;
+                    height: 45px;
+                    font-size: 16px;
+                    border: 1px solid #f3f3f3;
+                    border-radius: 10px;
+                    padding-left: 46px;
+                    padding-right: 15px;
+                    @include placeholder {
+                        color: #c4c4c4;
+                    }
+                }
+            }
         }
+
         .sneakers {
             display: flex;
+            flex-wrap: wrap;
             gap: 40px;
         }
     }
