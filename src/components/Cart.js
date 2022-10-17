@@ -1,18 +1,24 @@
-function Cart() {
+function Cart({ onClose, products = [] }) {
     return (
-        <div style={{ display: 'none' }} className="cart">
+        <div className="cart">
             <div className="right-side">
-                <h2 className="cart__title section-title">Корзина</h2>
+                <div className="title-block">
+                    <h2 className="cart__title section-title">Корзина</h2>
+                    <img onClick={onClose} src="/img/btn-remove.svg" alt="Close" />
+                </div>
                 <ul className="cart__list">
-                    <li className="cart__item">
-                        <img className="cart__item-image" src="/img/sneakers/1.jpg" alt="Sneakers" />
-                        <div className="cart__item-descr">
-                            <span className="cart__item-text">Мужские Кроссовки Nike Air Max 270</span>
-                            <span className="cart__item-price">12 999 руб.</span>
-                        </div>
-                        <img className="cart__item-remove" src="/img/btn-remove.svg" alt="Button remove" />
-                    </li>
-                    {/* cart__item 1 */}
+                    {products.map((obj) =>
+                    (
+                        <li className="cart__item">
+                            <img className="cart__item-image" src={obj.imgURL} alt="Sneakers" />
+                            <div className="cart__item-descr">
+                                <span className="cart__item-text">{obj.title}</span>
+                                <span className="cart__item-price">{obj.price} руб.</span>
+                            </div>
+                            <img className="cart__item-remove" src="/img/btn-remove.svg" alt="Remove" />
+                        </li>
+                    )
+                    )}
                 </ul>
                 <ul className="cart__total">
                     <li className="cart__total-item">
