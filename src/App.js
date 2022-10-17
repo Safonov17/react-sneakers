@@ -1,37 +1,31 @@
 import Card from './components/Card'
 import Header from './components/Header'
 import Cart from './components/Cart'
-
-const arr = [
-  {
-    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
-    price: 12999,
-    imgURL: './img/sneakers/1.jpg'
-  },
-  {
-    title: 'Мужские Кроссовки Nike Air Max 270',
-    price: 8499,
-    imgURL: './img/sneakers/2.jpg'
-  },
-  {
-    title: 'Кроссовки Puma X Aka Boku Future Rider',
-    price: 8999,
-    imgURL: './img/sneakers/3.jpg'
-  },
-  {
-    title: 'Мужские Кроссовки Under Armour Curry 8',
-    price: 15199,
-    imgURL: './img/sneakers/5.jpg'
-  }
-]
+import React from 'react'
 
 function App() {
+  const [products, setProducts] = React.useState([]);
+  const [cartProducts, setCartProducts] = React.useState([]);
+  const [cartOpened, setCartOpened] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch('https://634d09bcf5d2cc648e9a9b4f.mockapi.io/products').then((res) => {
+      return res.json();
+    }).then((json) => {
+      setProducts(json);
+    });
+  }, []);
+
+  const onAddToCart = (obj) => {
+    setCartProducts(prev => [...prev, obj]);
+  }
+
   return (
     <div className="wrapper clear">
 
-      <Cart />
+      {cartOpened && <Cart products={cartProducts} onClose={() => setCartOpened(false)} />}
 
-      <Header />
+      <Header onClickCart={() => setCartOpened(true)} />
 
       <div className="content">
         <div className="title-box">
@@ -43,12 +37,13 @@ function App() {
         </div>
         <div className="sneakers">
 
-          {arr.map((obj) => (
+          {products.map((item) => (
             <Card
-              title={obj.title}
-              price={obj.price}
-              imgURL={obj.imgURL}
-              onClick={() => console.log(obj)}
+              title={item.title}
+              price={item.price}
+              imgURL={item.imgURL}
+              addToFavrites={() => console.log('Добавили в избранное')}
+              addToBasket={(obj) => onAddToCart(obj)}
             />
           ))}
 
