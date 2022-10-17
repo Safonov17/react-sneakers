@@ -23,9 +23,15 @@
         box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
         z-index: 100;
         padding: 30px;
-    }
-    &__title {
-        margin-bottom: 30px;
+        .title-block {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            img {
+                cursor: pointer;
+            }
+        }
     }
     &__list {
         display: flex;
