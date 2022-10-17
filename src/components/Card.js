@@ -1,19 +1,36 @@
-function Card(props) {
+import React from 'react';
+
+function Card({ addToFavorite, imgURL, title, price, addToBasket }) {
+    const [isAdded, setIsAdded] = React.useState(false);
+
+    const onClickPlus = () => {
+        addToBasket({ title, price, imgURL });
+        setIsAdded(!isAdded);
+    }
+
     return (
         <div className="card">
-            <img className="card__unliked-image" src="/img/heart-unliked.svg" alt="Unliked" />
-            <img className="card__image" src={props.imgURL} alt="" />
-            <h3 className="card__title">{props.title}</h3>
+            <img
+                className="card__unliked-image"
+                onClick={addToFavorite}
+                src="/img/heart-unliked.svg"
+                alt="Unliked"
+            />
+            <img className="card__image" src={imgURL} alt="" />
+            <h3 className="card__title">{title}</h3>
             <div className="card__price">
                 <div className="card__price-content">
                     <span className="card__price-content--text">Цена:</span>
-                    <span className="card__price-content--value">{props.price} руб.</span>
+                    <span className="card__price-content--value">{price} руб.</span>
                 </div>
-                <button onClick={props.onClick}>
-                    <img className="card__price-append" src="/img/plus.svg" alt="Append" />
-                </button>
+                <img
+                    className="card__price-append"
+                    onClick={onClickPlus}
+                    src={isAdded ? '/img/added.svg' : '/img/plus.svg'}
+                    alt="Append"
+                />
             </div>
-        </div>
+        </div >
     )
 }
 
