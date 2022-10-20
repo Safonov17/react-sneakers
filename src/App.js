@@ -2,6 +2,7 @@ import Card from './components/Card'
 import Header from './components/Header'
 import Cart from './components/Cart'
 import React from 'react'
+import axios from 'axios'
 
 function App() {
   const [products, setProducts] = React.useState([]);
